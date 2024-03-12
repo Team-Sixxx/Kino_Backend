@@ -4,6 +4,7 @@ import KinoAPI.security.entity.Role;
 import KinoAPI.security.entity.UserWithRoles;
 import KinoAPI.security.repository.RoleRepository;
 import KinoAPI.security.repository.UserWithRolesRepository;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -17,14 +18,14 @@ public class SetupDevUsers implements ApplicationRunner {
     UserWithRolesRepository userWithRolesRepository;
     RoleRepository roleRepository;
     PasswordEncoder pwEncoder;
-    String passwordUsedByAll;
+
+    @Value("${devPassword}")
+    private String passwordUsedByAll;
 
     public SetupDevUsers(UserWithRolesRepository userWithRolesRepository,RoleRepository roleRepository,PasswordEncoder passwordEncoder) {
         this.userWithRolesRepository = userWithRolesRepository;
         this.roleRepository = roleRepository;
         this.pwEncoder = passwordEncoder;
-
-        passwordUsedByAll = "test12";
     }
 
     public void run(ApplicationArguments args) {
