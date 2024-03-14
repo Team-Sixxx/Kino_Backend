@@ -1,3 +1,4 @@
+USE kinodb;
 create table employee (employee_id bigint not null auto_increment, email varchar(255), name varchar(255) not null, password varchar(255) not null, phone varchar(255), role varchar(255), primary key (employee_id)) engine=InnoDB;
 create table film (extra_screenings bit not null, film_duration integer, rating integer, end_date datetime(6) not null, film_id bigint not null auto_increment, release_date datetime(6) not null, start_time datetime(6) not null, description TEXT, genre varchar(255), title varchar(255) not null, primary key (film_id)) engine=InnoDB;
 create table membership (end_date datetime(6) not null, membership_id bigint not null auto_increment, start_date datetime(6) not null, user_id bigint, status enum ('ACTIVE','INACTIVE','CANCELLED'), primary key (membership_id)) engine=InnoDB;
@@ -7,7 +8,15 @@ create table screening (number_of_seats integer not null, end_time datetime(6) n
 create table screening_history (attendees integer not null, end_time datetime(6) not null, screening_id bigint not null, start_time datetime(6) not null, theater_id bigint not null, primary key (screening_id, theater_id)) engine=InnoDB;
 
 create table theater (number_of_rows integer not null, seats_per_row integer not null, theater_id bigint not null auto_increment, primary key (theater_id)) engine=InnoDB;
-create table seat (row_number integer, seat_number integer, seat_id bigint not null auto_increment, theater_id bigint, status varchar(255), primary key (seat_id)) engine=InnoDB;
+
+CREATE TABLE Seat (
+    `row_number` INTEGER,
+    seat_number INTEGER,
+    seat_id BIGINT NOT NULL AUTO_INCREMENT,
+    theater_id BIGINT,
+    status VARCHAR(255),
+    PRIMARY KEY (seat_id)
+) ENGINE=InnoDB;
 create table ticket (price float(53) not null, screening_id bigint, seat_id bigint, ticket_id bigint not null auto_increment, seat_number varchar(255), status enum ('Available','Booked','Cancelled'), primary key (ticket_id)) engine=InnoDB;
 create table user (user_id bigint not null auto_increment, email varchar(255) not null, name varchar(255) not null, password varchar(255) not null, username varchar(255) not null, primary key (user_id)) engine=InnoDB;
 create table user_roles (user_username varchar(50) not null, role_role_name varchar(255) not null, primary key (user_username, role_role_name)) engine=InnoDB;
