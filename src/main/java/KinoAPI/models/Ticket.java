@@ -1,4 +1,4 @@
-package models;
+package KinoAPI.models;
 
 import jakarta.persistence.*;
 
@@ -14,7 +14,9 @@ public class Ticket {
     @JoinColumn(name = "screeningId")
     private Screening screening;
 
-    private int seatId;
+    @OneToOne
+    @JoinColumn(name = "seatId")
+    private Seat seatId;
 
     private double price;
 

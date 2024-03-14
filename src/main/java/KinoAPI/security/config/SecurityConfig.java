@@ -60,7 +60,9 @@ public class SecurityConfig {
             .requestMatchers(mvcMatcherBuilder.pattern(HttpMethod.GET, "/api/demo/anonymous")).permitAll()
 
             //Allow index.html for anonymous users
-            .requestMatchers(mvcMatcherBuilder.pattern(HttpMethod.GET, "/index.html")).permitAll()
+            .requestMatchers(mvcMatcherBuilder.pattern(HttpMethod.GET, "/api/films")).permitAll()
+
+
             .requestMatchers(mvcMatcherBuilder.pattern(HttpMethod.GET, "/")).permitAll()
 
             //Allow for swagger-ui
@@ -77,7 +79,7 @@ public class SecurityConfig {
             .requestMatchers(mvcMatcherBuilder.pattern(HttpMethod.DELETE, "/categories/*")).hasAuthority("ADMIN")
             .requestMatchers(mvcMatcherBuilder.pattern(HttpMethod.POST, "/categories")).hasAuthority("ADMIN")
 
-
+            .requestMatchers(mvcMatcherBuilder.pattern(HttpMethod.GET, "/api/html")).hasAuthority("ADMIN")
 
             // for user and delete and put for authenticated user
             .requestMatchers(mvcMatcherBuilder.pattern(HttpMethod.PUT, "/recipes/*")).authenticated()

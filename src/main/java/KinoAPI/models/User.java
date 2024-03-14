@@ -1,4 +1,4 @@
-package models;
+package KinoAPI.models;
 
 
 import jakarta.persistence.*;

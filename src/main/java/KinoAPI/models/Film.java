@@ -1,4 +1,4 @@
-package models;
+package KinoAPI.models;
 
 import jakarta.persistence.*;
 import lombok.Getter;
@@ -13,11 +13,9 @@ public class Film {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-
     private Long filmId;
 
     @Column(nullable = false)
-
     private String title;
 
     @Column(columnDefinition = "TEXT")
@@ -25,7 +23,11 @@ public class Film {
 
     private String genre;
 
-    private int ageRating;
+    @Column(name = "rating") // Renamed column from ageRating to rating
+    private int ageRating; // Keeping this field for backward compatibility
+
+    @Column(name = "filmDuration") // Renamed column from duration to filmDuration
+    private int duration; // New column name
 
     @Column(nullable = false)
     private Date startTime;
@@ -37,6 +39,4 @@ public class Film {
 
     @Column(nullable = false)
     private Date releaseDate;
-
-
 }
