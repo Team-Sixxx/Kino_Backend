@@ -1,10 +1,7 @@
 package KinoAPI.security.entity;
 
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.FetchType;
-import jakarta.persistence.Id;
-import jakarta.persistence.ManyToMany;
+import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -16,6 +13,7 @@ import java.util.Set;
 @Getter
 @Setter
 @NoArgsConstructor
+@Table(name = "Role")
 public class Role {
    @Id
    private String roleName;
