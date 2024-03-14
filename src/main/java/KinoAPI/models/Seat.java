@@ -4,24 +4,23 @@ import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.context.annotation.DependsOn;
 
 @Entity
 @Table(name = "Seat")
-@Data
-@NoArgsConstructor
-@AllArgsConstructor
+@DependsOn("Theater")
 public class Seat {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "SeatId")
-    private Long seatId;
+    private Integer seatId;
 
     @Column(name = "theaterId")
     private Long theaterId;
 
-    @Column(name = "RowNumber")
-    private Integer rowNumber;
+    @Column(name = "RowNum")
+    private Integer rowNum;
 
     @Column(name = "SeatNumber")
     private Integer seatNumber;
