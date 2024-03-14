@@ -6,7 +6,8 @@ import org.springframework.boot.autoconfigure.domain.EntityScan;
 
 //@SpringBootApplication( exclude = {SecurityAutoConfiguration.class} )
 @SpringBootApplication
-//@EntityScan(basePackages = "KinoAPI.models")
+@EntityScan(basePackages = {"KinoAPI.models", "KinoAPI.security.entity"})
+
 public class JavaSecurityApiApplication {
 
     public static void main(String[] args) {

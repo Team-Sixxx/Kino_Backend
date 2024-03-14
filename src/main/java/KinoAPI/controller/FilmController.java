@@ -1,3 +1,4 @@
+/*
 package KinoAPI.controller;
 
 import KinoAPI.models.Film;
@@ -25,3 +26,4 @@ public class FilmController {
         return filmRepository.findAll();
     }
 }
+*/

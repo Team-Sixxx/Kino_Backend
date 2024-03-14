@@ -1,9 +1,11 @@
 package KinoAPI.models;
 
 import jakarta.persistence.*;
+import org.springframework.context.annotation.DependsOn;
 
 @Entity
 @Table(name = "Ticket")
+@DependsOn("seat")
 public class Ticket {
 
     @Id
