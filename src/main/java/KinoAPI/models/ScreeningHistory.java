@@ -13,11 +13,6 @@ public class ScreeningHistory {
     @JoinColumn(name = "screeningId")
     private Screening screening;
 
-    @Id
-    @ManyToOne
-    @JoinColumn(name = "theaterId")
-    private Theater theater;
-
     @Column(nullable = false)
     private Date startTime;
 
