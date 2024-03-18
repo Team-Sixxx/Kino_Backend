@@ -33,7 +33,7 @@ public class Theater {
                     seat.setTheaterId(this.theaterId);
                     seat.setRowNum(i);
                     seat.setSeatNumber(j);
-                    seat.setStatus("Available");
+                    seat.setStatus(true);
                     entityManager.persist(seat);
                 }
             }
