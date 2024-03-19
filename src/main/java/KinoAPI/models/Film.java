@@ -35,6 +35,9 @@ public class Film {
     @Column(nullable = false)
     private Date endDate;
 
+    @Column(nullable = false)
+    private String movieTrailer;
+
     private boolean extraScreenings;
 
     @Column(nullable = false)

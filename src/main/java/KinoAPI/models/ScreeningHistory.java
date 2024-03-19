@@ -1,6 +1,8 @@
 package KinoAPI.models;
 
 import jakarta.persistence.*;
+import lombok.Getter;
+import lombok.Setter;
 
 import java.util.Date;
 
@@ -8,14 +10,21 @@ import java.util.Date;
 @Table(name = "ScreeningHistory")
 public class ScreeningHistory {
 
+    @Getter
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long screeningHistoryId;
+
+    @Getter
     @ManyToOne
     @JoinColumn(name = "screeningId")
     private Screening screening;
 
+    @Getter    @Setter
     @Column(nullable = false)
     private Date startTime;
 
+    @Getter    @Setter
     @Column(nullable = false)
     private Date endTime;
 

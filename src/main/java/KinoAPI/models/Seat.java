@@ -1,9 +1,8 @@
 package KinoAPI.models;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.Getter;
+import lombok.Setter;
 import org.springframework.context.annotation.DependsOn;
 
 @Entity
@@ -11,23 +10,26 @@ import org.springframework.context.annotation.DependsOn;
 @DependsOn("Theater")
 public class Seat {
 
+    @Getter
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "SeatId")
     private Integer seatId;
 
+    @Getter    @Setter
     @Column(name = "theaterId")
     private Long theaterId;
 
+    @Getter    @Setter
     @Column(name = "RowNum")
     private Integer rowNum;
-
+    @Getter    @Setter
     @Column(name = "SeatNumber")
     private Integer seatNumber;
 
-    @Column(name = "Status")
-    private String status;
-
+    @Getter    @Setter
+    @Column(name = "SeatStatus")
+    private boolean status;
 
     @ManyToOne
     @JoinColumn(name = "theaterId", referencedColumnName = "theaterId", insertable = false, updatable = false)
