@@ -37,7 +37,7 @@ public class Ticket {
 
 
     public enum TicketStatus{
-        Available, Booked, Cancelled
+        Available, Booked, Unavailable
 
     }
 
