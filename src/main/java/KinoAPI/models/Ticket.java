@@ -1,4 +1,5 @@
 package KinoAPI.models;
+
 import lombok.Getter;
 import lombok.Setter;
 import jakarta.persistence.*;
@@ -6,7 +7,7 @@ import org.springframework.context.annotation.DependsOn;
 
 @Entity
 @Table(name = "Ticket")
-@DependsOn("seat")
+@DependsOn("Seat")
 public class Ticket {
 
     @Getter

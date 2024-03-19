@@ -10,7 +10,12 @@ import java.util.Date;
 @Table(name = "ScreeningHistory")
 public class ScreeningHistory {
 
-    @Getter    @Id
+    @Getter
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long screeningHistoryId;
+
+    @Getter
     @ManyToOne
     @JoinColumn(name = "screeningId")
     private Screening screening;
