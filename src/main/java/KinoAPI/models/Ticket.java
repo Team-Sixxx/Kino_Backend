@@ -21,9 +21,8 @@ public class Ticket {
     private Screening screening;
 
     @Getter   @Setter
-    @OneToOne
     @JoinColumn(name = "seatId")
-    private Seat seatId;
+    private int seatId;
 
     @Getter   @Setter
     private double price;

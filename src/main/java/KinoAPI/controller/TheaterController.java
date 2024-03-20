@@ -1,5 +1,6 @@
 package KinoAPI.controller;
 
+import KinoAPI.models.Seat;
 import KinoAPI.models.Theater;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -9,6 +10,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import KinoAPI.repository.TheaterRepository;
 
+import java.util.List;
 import java.util.Optional;
 
 @RestController
@@ -16,17 +18,33 @@ import java.util.Optional;
 public class TheaterController {
 
     private final TheaterRepository theaterRepository;
+    private final SeatController seatController;
 
     @Autowired
-    public TheaterController(TheaterRepository theaterRepository) {
+    public TheaterController(TheaterRepository theaterRepository, SeatController seatController) {
         this.theaterRepository = theaterRepository;
+        this.seatController = seatController;
     }
 
-    @PostMapping("/theaters")
+    @GetMapping("/theater")
+    public List<Theater> getAllTheaters() {
+        return theaterRepository.findAll();
+    }
+
+    @PostMapping("/theater")
     public ResponseEntity<Theater> createTheater(@RequestBody Theater theater) {
         Theater createdTheater = theaterRepository.save(theater);
+        // Opret sæder for det oprettede teater
+        List<Seat> seats = seatController.createSeatsForTheater(createdTheater);
+        // Du kan håndtere seats, hvis det er nødvendigt
         return new ResponseEntity<>(createdTheater, HttpStatus.CREATED);
     }
+
+//    @PostMapping("/postTheater")
+//    public ResponseEntity<Theater> createTheater(@RequestBody Theater theater) {
+//        Theater createdTheater = theaterRepository.save(theater);
+//        return new ResponseEntity<>(createdTheater, HttpStatus.CREATED);
+//    }
 
     @GetMapping("/theaters")
     public ResponseEntity<Page<Theater>> getAllTheaters(Pageable pageable) {

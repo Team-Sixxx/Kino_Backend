@@ -22,27 +22,4 @@ public class Theater {
     @Column(name = "SeatsPerRow")
     private int seatsPerRow;
 
-    @PostPersist
-    public void createSeats() {
-        EntityManager entityManager = Persistence.createEntityManagerFactory("yourPersistenceUnitName").createEntityManager();
-        entityManager.getTransaction().begin();
-        try {
-            for (int i = 1; i <= numberOfRows; i++) {
-                for (int j = 1; j <= seatsPerRow; j++) {
-                    Seat seat = new Seat();
-                    seat.setTheaterId(this.theaterId);
-                    seat.setRowNum(i);
-                    seat.setSeatNumber(j);
-                    seat.setStatus(true);
-                    entityManager.persist(seat);
-                }
-            }
-            entityManager.getTransaction().commit();
-        } catch (Exception e) {
-            entityManager.getTransaction().rollback();
-            throw e;
-        } finally {
-            entityManager.close();
-        }
-    }
 }

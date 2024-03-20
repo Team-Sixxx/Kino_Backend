@@ -1,12 +1,15 @@
 package KinoAPI.controller;
 
 import KinoAPI.models.Screening;
+import KinoAPI.models.Seat;
+import KinoAPI.models.Ticket;
 import KinoAPI.repository.ScreeningRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -15,10 +18,12 @@ import java.util.Optional;
 public class ScreeningController {
 
         private final ScreeningRepository screeningRepository;
+        private final TicketController ticketController;
 
         @Autowired
-        public ScreeningController(ScreeningRepository screeningRepository) {
+        public ScreeningController(ScreeningRepository screeningRepository, TicketController ticketController) {
             this.screeningRepository = screeningRepository;
+            this.ticketController = ticketController;
         }
 
         @GetMapping("/screenings")
@@ -33,13 +38,14 @@ public class ScreeningController {
                     .orElseGet(() -> new ResponseEntity<>(HttpStatus.NOT_FOUND));
         }
 
-        @PostMapping("/screenings")
-        public ResponseEntity<Screening> createScreening(@RequestBody Screening screening) {
-            Screening createdScreening = screeningRepository.save(screening);
-            return new ResponseEntity<>(createdScreening, HttpStatus.CREATED);
-        }
+    @PostMapping("/screenings")
+    public ResponseEntity<Screening> createScreening(@RequestBody Screening screening) throws NoSuchFieldException {
+        Screening createdScreening = screeningRepository.save(screening);
+        List<Ticket> tickets = ticketController.createTicketsForScreening(createdScreening);
+        return new ResponseEntity<>(createdScreening, HttpStatus.CREATED);
+    }
 
-        @PutMapping("/screenings/{id}")
+    @PutMapping("/screenings/{id}")
         public ResponseEntity<Screening> updateScreening(@PathVariable Long id, @RequestBody Screening screeningDetails) {
             Optional<Screening> optionalScreening = screeningRepository.findById(id);
             if (optionalScreening.isPresent()) {
@@ -65,4 +71,9 @@ public class ScreeningController {
             }
         }
 
+
+    private double calculateTicketPrice() {
+        // Implement ticket price calculation logic here
+        return 0.0; // Placeholder return value
+    }
 }
