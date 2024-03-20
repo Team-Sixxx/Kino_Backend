@@ -21,8 +21,9 @@ public class Ticket {
     private Screening screening;
 
     @Getter   @Setter
+    @ManyToOne
     @JoinColumn(name = "seatId")
-    private int seatId;
+    private Seat seat;
 
     @Getter   @Setter
     private double price;
@@ -31,13 +32,8 @@ public class Ticket {
     @Enumerated(EnumType.STRING)
     private TicketStatus status;
 
-    @Getter   @Setter
-    @Column(name = "seatNumber")
-    private String seatNumber;
-
-
     public enum TicketStatus{
-        Available, Booked, Unavailable
+        Available, Reserved, Sold, Unavailable
 
     }
 

@@ -50,10 +50,9 @@ public class TicketController {
             Optional<Ticket> optionalTicket = ticketRepository.findById(id);
             if (optionalTicket.isPresent()) {
                 Ticket ticket = optionalTicket.get();
-                ticket.setSeatId(ticketDetails.getSeatId());
+                ticket.setSeat(ticketDetails.getSeat());
                 ticket.setPrice(ticketDetails.getPrice());
                 ticket.setStatus(ticketDetails.getStatus());
-                ticket.setSeatNumber(ticketDetails.getSeatNumber());
                 Ticket updatedTicket = ticketRepository.save(ticket);
                 return new ResponseEntity<>(updatedTicket, HttpStatus.OK);
             } else {
@@ -78,7 +77,7 @@ public class TicketController {
             if (seat.isStatus()) { // Check if the seat is available
                 Ticket ticket = new Ticket();
                 ticket.setScreening(screening);
-                ticket.setSeatId(seat.getSeatId()); // Set the seat directly, not just the ID
+                ticket.setSeat(seat); // Set the seat directly, not just the ID
                 ticket.setPrice(0);
                 ticket.setStatus(Ticket.TicketStatus.Available);
                 tickets.add(ticket);
