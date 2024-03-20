@@ -59,9 +59,11 @@ public class SecurityConfig {
             //This is for demo purposes only, and should be removed for a real system
             .requestMatchers(mvcMatcherBuilder.pattern(HttpMethod.GET, "/api/demo/anonymous")).permitAll()
 
-            //Allow index.html for anonymous users
+            //Access to the films endpoints
             .requestMatchers(mvcMatcherBuilder.pattern(HttpMethod.POST, "/api/films")).permitAll()
             .requestMatchers(mvcMatcherBuilder.pattern(HttpMethod.GET, "/api/films")).permitAll()
+            .requestMatchers(mvcMatcherBuilder.pattern(HttpMethod.PUT, "/api/films")).permitAll()
+            .requestMatchers(mvcMatcherBuilder.pattern(HttpMethod.DELETE, "/api/films")).permitAll()
 
 
             .requestMatchers(mvcMatcherBuilder.pattern(HttpMethod.GET, "/")).permitAll()
@@ -69,10 +71,24 @@ public class SecurityConfig {
             //Allow for swagger-ui
             .requestMatchers(mvcMatcherBuilder.pattern(HttpMethod.POST, "/api/screenings")).permitAll()
             .requestMatchers(mvcMatcherBuilder.pattern(HttpMethod.GET, "/api/screenings")).permitAll()
+            .requestMatchers(mvcMatcherBuilder.pattern(HttpMethod.PUT, "/api/screenings")).permitAll()
+            .requestMatchers(mvcMatcherBuilder.pattern(HttpMethod.DELETE, "/api/screenings")).permitAll()
+
             .requestMatchers(mvcMatcherBuilder.pattern(HttpMethod.GET, "/api/tickets")).permitAll()
+            .requestMatchers(mvcMatcherBuilder.pattern(HttpMethod.PUT, "/api/tickets")).permitAll()
+            .requestMatchers(mvcMatcherBuilder.pattern(HttpMethod.POST, "/api/tickets")).permitAll()
+            .requestMatchers(mvcMatcherBuilder.pattern(HttpMethod.DELETE, "/api/tickets")).permitAll()
+
+            .requestMatchers(mvcMatcherBuilder.pattern(HttpMethod.GET, "/api/seats")).permitAll()
+            .requestMatchers(mvcMatcherBuilder.pattern(HttpMethod.PUT, "/api/seats")).permitAll()
+            .requestMatchers(mvcMatcherBuilder.pattern(HttpMethod.POST, "/api/seats")).permitAll()
+            .requestMatchers(mvcMatcherBuilder.pattern(HttpMethod.DELETE, "/api/seats")).permitAll()
+
 
             .requestMatchers(mvcMatcherBuilder.pattern(HttpMethod.POST, "/api/theater")).permitAll()
             .requestMatchers(mvcMatcherBuilder.pattern(HttpMethod.GET, "/api/theater")).permitAll()
+            .requestMatchers(mvcMatcherBuilder.pattern(HttpMethod.PUT, "/api/theater")).permitAll()
+            .requestMatchers(mvcMatcherBuilder.pattern(HttpMethod.DELETE, "/api/theater")).permitAll()
 
             .requestMatchers(mvcMatcherBuilder.pattern(HttpMethod.GET, "/swagger-ui/**")).permitAll()
             .requestMatchers(mvcMatcherBuilder.pattern(HttpMethod.GET, "/swagger-resources/**")).permitAll()
