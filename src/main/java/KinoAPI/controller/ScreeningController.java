@@ -38,6 +38,20 @@ public class ScreeningController {
                     .orElseGet(() -> new ResponseEntity<>(HttpStatus.NOT_FOUND));
         }
 
+
+    @GetMapping("/film/screenings/{id}")
+    public ResponseEntity<?> getScreeningByFilmId(@PathVariable Long id) {
+        List<Screening> screenings = screeningRepository.findByFilmFilmId(id);
+
+        if (!screenings.isEmpty()) {
+            return new ResponseEntity<>(screenings, HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>("No screenings found", HttpStatus.NOT_FOUND);
+        }
+    }
+
+
+
     @PostMapping("/screenings")
     public ResponseEntity<Screening> createScreening(@RequestBody Screening screening) throws NoSuchFieldException {
         Screening createdScreening = screeningRepository.save(screening);

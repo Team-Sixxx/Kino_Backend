@@ -71,6 +71,8 @@ public class SecurityConfig {
             //Allow for swagger-ui
             .requestMatchers(mvcMatcherBuilder.pattern(HttpMethod.POST, "/api/screenings")).permitAll()
             .requestMatchers(mvcMatcherBuilder.pattern(HttpMethod.GET, "/api/screenings")).permitAll()
+            .requestMatchers(mvcMatcherBuilder.pattern(HttpMethod.GET, "/api/film/screenings/*")).permitAll()
+            .requestMatchers(mvcMatcherBuilder.pattern(HttpMethod.GET, "/api/film/screenings/{id}")).permitAll()
             .requestMatchers(mvcMatcherBuilder.pattern(HttpMethod.PUT, "/api/screenings")).permitAll()
             .requestMatchers(mvcMatcherBuilder.pattern(HttpMethod.DELETE, "/api/screenings")).permitAll()
 
