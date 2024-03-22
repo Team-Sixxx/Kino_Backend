@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.sql.Blob;
 import java.util.Date;
 
 @Entity
@@ -37,6 +38,9 @@ public class Film {
 
     @Column(nullable = false)
     private String movieTrailer;
+
+    @Lob// Annotation for large object storage
+    private Blob thumbnail; // Field to store the image data
 
     private boolean extraScreenings;
 

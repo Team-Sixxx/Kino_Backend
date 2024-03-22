@@ -47,7 +47,7 @@ public class TicketController {
 
         @GetMapping("/tickets/screening/{id}")
         public ResponseEntity<?> getTicketsByScreeningId(@PathVariable Long id) {
-            List<Ticket> tickets = ticketRepository.findAllByScreeningId(id);
+            List<Ticket> tickets = ticketRepository.findAllByScreeningScreeningId(id);
             if (!tickets.isEmpty()) {
                 return new ResponseEntity<>(tickets, HttpStatus.OK);
             } else {

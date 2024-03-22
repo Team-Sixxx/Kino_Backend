@@ -1,7 +1,6 @@
 package KinoAPI.controller;
 
 import KinoAPI.models.Screening;
-import KinoAPI.models.Seat;
 import KinoAPI.models.Ticket;
 import KinoAPI.repository.ScreeningRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,7 +8,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
