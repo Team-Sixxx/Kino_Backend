@@ -45,6 +45,16 @@ public class TicketController {
             return ticket.map(value -> new ResponseEntity<>(value, HttpStatus.OK)).orElseGet(() -> new ResponseEntity<>(HttpStatus.NOT_FOUND));
         }
 
+        @GetMapping("/tickets/screening/{id}")
+        public ResponseEntity<?> getTicketsByScreeningId(@PathVariable Long id) {
+            List<Ticket> tickets = ticketRepository.findAllByScreeningId(id);
+            if (!tickets.isEmpty()) {
+                return new ResponseEntity<>(tickets, HttpStatus.OK);
+            } else {
+                return new ResponseEntity<>("No tickets found", HttpStatus.NOT_FOUND);
+            }
+        }
+
         @PutMapping("/tickets/{id}")
         public ResponseEntity<Ticket> updateTicket(@PathVariable Long id, @RequestBody Ticket ticketDetails) {
             Optional<Ticket> optionalTicket = ticketRepository.findById(id);
@@ -60,6 +70,42 @@ public class TicketController {
             }
         }
 
+    @PutMapping("/tickets/buy")
+    public ResponseEntity<String> buyTickets(@RequestBody List<Seat> seats) {
+        try {
+            for (Seat seat : seats) {
+                // Find the ticket associated with the provided seat
+                List<Ticket> tickets = ticketRepository.findAllBySeat(seat);
+                for (Ticket ticket : tickets) {
+                    // Update the status of each ticket to "bought"
+                    ticket.setStatus(Ticket.TicketStatus.Sold);
+                }
+                ticketRepository.saveAll(tickets);
+            }
+            return new ResponseEntity<>("Tickets bought successfully", HttpStatus.OK);
+        } catch (Exception e) {
+            return new ResponseEntity<>("Error buying tickets: " + e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+    @PutMapping("/tickets/reserve")
+    public ResponseEntity<String> reserveTickets(@RequestBody List<Seat> seats) {
+        try {
+            for (Seat seat : seats) {
+                // Find the ticket associated with the provided seat
+                List<Ticket> tickets = ticketRepository.findAllBySeat(seat);
+                for (Ticket ticket : tickets) {
+                    // Update the status of each ticket to "bought"
+                    ticket.setStatus(Ticket.TicketStatus.Reserved);
+                }
+                ticketRepository.saveAll(tickets);
+            }
+            return new ResponseEntity<>("Tickets bought successfully", HttpStatus.OK);
+        } catch (Exception e) {
+            return new ResponseEntity<>("Error buying tickets: " + e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
         @DeleteMapping("/tickets/{id}")
         public ResponseEntity<HttpStatus> deleteTicket(@PathVariable Long id) {
             try {
@@ -69,6 +115,7 @@ public class TicketController {
                 return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
             }
         }
+
 
     public List<Ticket> createTicketsForScreening(Screening screening) {
         List<Ticket> tickets = new ArrayList<>();
