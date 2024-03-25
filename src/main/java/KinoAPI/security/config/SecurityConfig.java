@@ -80,6 +80,7 @@ public class SecurityConfig {
             .requestMatchers(mvcMatcherBuilder.pattern(HttpMethod.PUT, "/api/tickets")).permitAll()
             .requestMatchers(mvcMatcherBuilder.pattern(HttpMethod.POST, "/api/tickets")).permitAll()
             .requestMatchers(mvcMatcherBuilder.pattern(HttpMethod.DELETE, "/api/tickets")).permitAll()
+            .requestMatchers(mvcMatcherBuilder.pattern(HttpMethod.DELETE, "/api/tickets/screening/{id}")).permitAll()
 
             .requestMatchers(mvcMatcherBuilder.pattern(HttpMethod.GET, "/api/seats")).permitAll()
             .requestMatchers(mvcMatcherBuilder.pattern(HttpMethod.PUT, "/api/seats")).permitAll()
